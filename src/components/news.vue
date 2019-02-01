@@ -1,23 +1,31 @@
 <template>
-    <div>
-        我是新闻页面
-    </div>
+  <div>
+      <div >
+
+      </div>
+  </div>
 </template>
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
-    data () {
-        return {
-           
+  data() {
+    return {
+      newsArr: []
+    };
+  },
+  mounted: function() {
+      var that = this.newsArr
+    axios
+      .get("https://api.apiopen.top/getJoke?page=1&count=2&type=video")
+      .then(function(response) {
+        if (response.status === 200) {
+          console.log(response);
+          that = response.data.result;
+          console.log(that);
+        }else{
+            console.log("请求失败!")
         }
-    },
-    mounted:function(){
-        axios
-      .get('https://api.apiopen.top/getJoke?page=1&count=2&type=video')
-      .then(function (response) {
-    console.log(response);
-  })
-    }
-    
-}
+      });
+  }
+};
 </script>
